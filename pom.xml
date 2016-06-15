@@ -8,6 +8,7 @@
     <modules>
         <module>DB</module>
         <module>Services</module>
+        <module>akka</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
