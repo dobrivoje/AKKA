@@ -1,4 +1,4 @@
-package spring.akka_lightbend_HW.AkkA.messages;
+package spring.akkaHW.AkkA.messages;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package spring.akka_lightbend_HW.AkkA.infra;
+package spring.akkaHW.AkkA.infra;
 
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;

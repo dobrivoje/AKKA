@@ -1,4 +1,4 @@
-package akka_hw.akka.helpers;
+package spring.akkaHW.AkkA.helpers;
 
 import ent.Click;
 import java.io.Serializable;

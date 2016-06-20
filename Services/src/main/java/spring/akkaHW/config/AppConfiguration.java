@@ -1,4 +1,4 @@
-package spring.akka_lightbend_HW.config;
+package spring.akkaHW.config;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
-import spring.akka_lightbend_HW.AkkA.infra.SpringExtension;
-import static spring.akka_lightbend_HW.AkkA.infra.SpringExtension.SpringExtProvider;
-import spring.akka_lightbend_HW.beans.DBBeanImpl;
+import spring.akkaHW.AkkA.infra.SpringExtension;
+import static spring.akkaHW.AkkA.infra.SpringExtension.SpringExtProvider;
+import spring.akkaHW.beans.DBBeanImpl;
 import spring.jpa.services.IDBService;
-import spring.akka_lightbend_HW.services.IDBAkkA_Service;
+import spring.akkaHW.services.IDBAkkA_Service;
 
 @Configuration
 @Transactional
-@ComponentScan(basePackages = {"spring.akka_lightbend_HW", "spring.jpa.config"})
+@ComponentScan(basePackages = {"spring.akkaHW", "spring.jpa.config"})
 public class AppConfiguration {
 
     @Autowired

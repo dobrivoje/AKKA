@@ -1,4 +1,4 @@
-package spring.akka_lightbend_HW;
+package spring.akkaHW;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -9,12 +9,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import scala.concurrent.Await;
 import scala.concurrent.duration.FiniteDuration;
-import spring.akka_lightbend_HW.config.AppConfiguration;
-import spring.akka_lightbend_HW.AkkA.messages.NewStat;
+import spring.akkaHW.config.AppConfiguration;
+import spring.akkaHW.AkkA.messages.NewStat;
 import static akka.pattern.Patterns.ask;
 import ent.Click;
-import spring.akka_lightbend_HW.AkkA.helpers.Stat;
-import spring.akka_lightbend_HW.AkkA.messages.GetStat;
+import java.util.Date;
+import java.util.logging.Logger;
+import spring.akkaHW.AkkA.helpers.Stat;
+import spring.akkaHW.AkkA.messages.GetStat;
+import spring.akkaHW.AkkA.messages.NewClick;
 
 public class Main {
 
@@ -22,9 +25,9 @@ public class Main {
     private static final ActorSystem system = ctx.getBean(ActorSystem.class);
     private static final ActorRef actorRef = ctx.getBean(ActorRef.class);
 
-    private static Stat returnResult(Object message, long howMuch, TimeUnit timeUnit) throws Exception {
+    private static Stat returnStatResult(Object message, long timeToWait, TimeUnit timeUnit) throws Exception {
 
-        FiniteDuration duration = FiniteDuration.create(howMuch, timeUnit);
+        FiniteDuration duration = FiniteDuration.create(timeToWait, timeUnit);
         Future<Object> result = ask(actorRef, message, Timeout.durationToTimeout(duration));
 
         Stat statistika;
@@ -43,12 +46,18 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        actorRef.tell(new NewStat(7, "2015-1-1", "2015-1-31"), ActorRef.noSender());
 
-        Stat stat = returnResult(new GetStat(), 11, TimeUnit.SECONDS);
+        Logger.getLogger("test").info("Test 1 : Insert i Statistika...");
+        
+        actorRef.tell(new NewClick(1, new Date(), "https://kurir.rs"), ActorRef.noSender());
+
+        actorRef.tell(new NewStat(1, "2016-6-19", "2016-6-30"), ActorRef.noSender());
+
+        Stat stat = returnStatResult(new GetStat(), 11, TimeUnit.SECONDS);
 
         for (Click s : stat.getClickList()) {
             System.out.println(s);
         }
+
     }
 }

@@ -1,7 +1,7 @@
 package hw2.actors;
 
 import akka.actor.UntypedActor;
-import akka_hw.akka.messages.StatMessage;
+import hw2.messages.StatMessage;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

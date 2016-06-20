@@ -6,9 +6,9 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.actor.Inbox;
 import akka.japi.Creator;
-import akka_hw.akka.messages.StatMessage;
 import ent.Users;
 import hw2.helpers.Stat;
+import hw2.messages.StatMessage;
 import java.text.ParseException;
 import scala.concurrent.duration.Duration;
 
