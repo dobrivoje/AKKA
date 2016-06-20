@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.UsersMapper">
+    <cache />
+    
+    <select id="getStatisticsByDates" resultType="Click">
+        SELECT
+            CLICK.IDC,
+            CLICK.FK_IDU,
+            CLICK.DATE,
+            CLICK.IPADDRESS
+        FROM CLICK
+            WHERE CLICK.FK_IDU = #{userId} AND 
+                  CLICK.DATE >= #{dateFrom} AND CLICK.DATE <= #{dateTo}
+    </select>
+    
+    <select id="getStatisticsByStrings" resultType="Click">
+        SELECT
+            CLICK.IDC,
+            CLICK.FK_IDU,
+            CLICK.DATE,
+            CLICK.IPADDRESS
+        FROM CLICK
+            WHERE CLICK.FK_IDU = #{userId} AND 
+                  CLICK.DATE >= #{dateFrom} AND CLICK.DATE <= #{dateTo}
+    </select>
+    
+    <insert id="insertNewClick" parameterType="Click">
+        INSERT INTO CLICK (IDC, FK_IDU, DATE, IPADDRESS)
+            VALUES
+        (#{userId}, #{dateFrom}, #{dateTo}, #{ipAddress})
+    </insert>
+
+</mapper>
