@@ -1,19 +1,17 @@
 package hw2.actors;
 
 import akka.actor.UntypedActor;
+import hw2.helpers.Stat;
 import hw2.messages.StatMessage;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import lightbend.HelloAkkaJavaOrig_saJPA;
-import spring.jpa.services.IDBService;
+import spring.jpa.services.IClickService;
 
 public class Master extends UntypedActor {
 
-    private final hw2.helpers.Stat stat = new hw2.helpers.Stat();
-    private final IDBService clickService;
+    private final Stat stat = new hw2.helpers.Stat();
+    private final IClickService clickService;
 
-    public Master(IDBService clickService) {
+    public Master(IClickService clickService) {
         this.clickService = clickService;
     }
 
@@ -28,7 +26,6 @@ public class Master extends UntypedActor {
                 );
                 getSender().tell(stat, getSelf());
             } catch (ParseException ex) {
-                Logger.getLogger(HelloAkkaJavaOrig_saJPA.class.getName()).log(Level.SEVERE, "greška OnRecieve metod.", ex);
             } finally {
                 //getContext().system().shutdown();
             }

@@ -10,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import spring.akkaHW.AkkA.infra.SpringExtension;
 import static spring.akkaHW.AkkA.infra.SpringExtension.SpringExtProvider;
-import spring.akkaHW.beans.DBBeanImpl;
-import spring.jpa.services.IDBService;
-import spring.akkaHW.services.IDBAkkA_Service;
 
 @Configuration
 @Transactional
@@ -34,11 +31,6 @@ public class AppConfiguration {
     public ActorRef getActorRef_JPA_DB(ActorSystem system) {
         return system.actorOf(SpringExtension.SpringExtProvider
                 .get(system).props("DBActor"), "dbactor");
-    }
-
-    @Bean
-    public IDBAkkA_Service getHWService(IDBService dbService) {
-        return new DBBeanImpl(dbService);
     }
 
 }

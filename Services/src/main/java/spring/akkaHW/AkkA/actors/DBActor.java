@@ -8,18 +8,18 @@ import spring.akkaHW.AkkA.helpers.Stat;
 import spring.akkaHW.AkkA.messages.GetStat;
 import spring.akkaHW.AkkA.messages.NewClick;
 import spring.akkaHW.AkkA.messages.NewStat;
-import spring.jpa.services.IDBService;
+import spring.jpa.services.IClickService;
 
 @Named("DBActor")
 @Scope("prototype")
 public class DBActor extends UntypedActor {
 
     private final Stat stat = new Stat();
-    private final IDBService DBService;
+    private final IClickService clickService;
 
     @Autowired
-    public DBActor(IDBService DBService) {
-        this.DBService = DBService;
+    public DBActor(IClickService clickService) {
+        this.clickService = clickService;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DBActor extends UntypedActor {
         if (message instanceof NewStat) {
 
             NewStat sm = (NewStat) message;
-            stat.getClickList().addAll(DBService.getStatistics(sm.getUserId(), sm.getDateFrom(), sm.getDateTo()));
+            stat.getClickList().addAll(clickService.getStatistics(sm.getUserId(), sm.getDateFrom(), sm.getDateTo()));
 
         } else if (message instanceof GetStat) {
 
@@ -37,7 +37,7 @@ public class DBActor extends UntypedActor {
 
             NewClick nc = (NewClick) message;
 
-            DBService.insertNewClick(nc.getUserID(), nc.getClickDate(), nc.getWebAddress());
+            clickService.insertNewClick(nc.getUserID(), nc.getClickDate(), nc.getWebAddress());
 
         } else {
             unhandled(message);

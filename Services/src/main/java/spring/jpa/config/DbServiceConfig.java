@@ -14,11 +14,8 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import spring.jpa.beans.ClickServiceBean;
-import spring.jpa.beans.DBServiceBean;
 import spring.jpa.beans.UserServiceBean;
-import spring.jpa.myAnnotations.EclipseLink_JPA;
 import spring.jpa.services.IClickService;
-import spring.jpa.services.IDBService;
 import spring.jpa.services.IUserService;
 
 @Configuration
@@ -27,20 +24,13 @@ import spring.jpa.services.IUserService;
 public class DbServiceConfig {
 
     @Bean
-    @EclipseLink_JPA
     IUserService getUserService() {
         return new UserServiceBean();
     }
 
     @Bean
-    @EclipseLink_JPA
     IClickService getClickService(IUserService userService) {
         return new ClickServiceBean(userService);
-    }
-
-    @Bean
-    public IDBService getDBService() {
-        return new DBServiceBean();
     }
 
     //<editor-fold defaultstate="collapsed" desc="infra">

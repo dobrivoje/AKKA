@@ -12,7 +12,6 @@ import scala.concurrent.duration.FiniteDuration;
 import spring.akkaHW.config.AppConfiguration;
 import spring.akkaHW.AkkA.messages.NewStat;
 import static akka.pattern.Patterns.ask;
-import ent.Click;
 import java.util.Date;
 import java.util.logging.Logger;
 import spring.akkaHW.AkkA.helpers.Stat;
@@ -55,9 +54,9 @@ public class Main {
 
         Stat stat = returnStatResult(new GetStat(), 11, TimeUnit.SECONDS);
 
-        for (Click s : stat.getClickList()) {
+        stat.getClickList().stream().forEach((s) -> {
             System.out.println(s);
-        }
+        });
 
     }
 }
