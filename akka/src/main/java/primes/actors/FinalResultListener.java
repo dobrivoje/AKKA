@@ -12,9 +12,7 @@ public class FinalResultListener extends UntypedActor {
     public void onReceive(Object message) {
         if (message instanceof PrimeResult) {
             result = (PrimeResult) message;
-        }
-        
-        if (message instanceof Answer) {
+        } else if (message instanceof Answer) {
             getSender().tell(result, getSelf());
             getContext().system().shutdown();
         } else {

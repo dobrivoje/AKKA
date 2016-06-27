@@ -29,7 +29,8 @@ public class PrimeCalculator {
                     }
                 }));
 
-        inbox.send(primeMaster, new NumberRangeMessage(startNumber, endNumber));
+        primeMaster.tell(new NumberRangeMessage(startNumber, endNumber), ActorRef.noSender());
+        
         inbox.send(finalResultListener, new Answer());
 
         PrimeResult g1 = (PrimeResult) inbox.receive(Duration.create(11, TimeUnit.SECONDS));

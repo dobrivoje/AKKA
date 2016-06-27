@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import spring.akkaHW.AkkA.infra.SpringExtension;
 import static spring.akkaHW.AkkA.infra.SpringExtension.SpringExtProvider;
+import spring.akkaHW.services.StatisticstImpl;
+import spring.akkaHW.services.IClickStat;
 
 @Configuration
 @Transactional
@@ -31,6 +33,11 @@ public class AppConfiguration {
     public ActorRef getActorRef_JPA_DB(ActorSystem system) {
         return system.actorOf(SpringExtension.SpringExtProvider
                 .get(system).props("DBActor"), "dbactor");
+    }
+
+    @Bean
+    public IClickStat getStatisticsBean(ActorSystem system, ActorRef actorRef) {
+        return new StatisticstImpl(system, actorRef);
     }
 
 }

@@ -10,5 +10,5 @@ public class PrimeResult {
     public Set<Long> getResult() {
         return results;
     }
-
+    
 }
